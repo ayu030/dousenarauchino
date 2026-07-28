@@ -1,0 +1,22 @@
+title: どうせならうちのこ
+description: Canvaで画像を変えるだけ。外でも着られる、おしゃれな犬Tシャツ・うちの子Tシャツを自作できる無料テンプレート配布サイト。
+url: https://uchinoko-tshirt.com
+lang: ja
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+permalink: /blog/:slug/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
