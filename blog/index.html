@@ -1,0 +1,149 @@
+---
+layout: null
+title: ブログ
+description: うちの子Tシャツの作り方、写真の選び方、プリント発注のコツなど。自作に役立つ記事をまとめています。
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ブログ｜どうせならうちのこ</title>
+  <meta name="description" content="{{ page.description }}">
+  <link rel="canonical" href="https://uchinoko-tshirt.com/blog/">
+  <meta property="og:title" content="ブログ｜どうせならうちのこ">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:type" content="website">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-sub: #f8f9fa;
+      --accent: #0b57d0;
+      --accent-hover: #0842a0;
+      --text-main: #202124;
+      --text-sub: #5f6368;
+      --border: #e8eaed;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      letter-spacing: 0.025em;
+    }
+    header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo { font-size: 17px; font-weight: 700; letter-spacing: 0.02em; }
+    .logo a { color: var(--text-main); text-decoration: none; }
+    nav { display: flex; gap: 28px; align-items: center; }
+    nav a { font-size: 13px; font-weight: 500; color: var(--text-sub); text-decoration: none; }
+    nav a:hover { color: var(--text-main); }
+
+    .section-wrap { max-width: 780px; margin: 0 auto; padding: 56px 40px 72px; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+    .section-title { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
+    .section-sub { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
+
+    .post-list { margin-top: 36px; }
+    .post-item {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      transition: opacity 0.15s;
+    }
+    .post-item:first-child { border-top: 1px solid var(--border); }
+    .post-item:hover { opacity: 0.65; }
+    .post-date {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+    .post-title { font-size: 17px; font-weight: 700; line-height: 1.5; margin-bottom: 6px; }
+    .post-desc { font-size: 13px; color: var(--text-sub); line-height: 1.75; }
+    .post-empty { font-size: 14px; color: var(--text-sub); padding: 32px 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-logo { font-size: 14px; font-weight: 700; }
+    .footer-copy { font-size: 11px; color: var(--text-sub); }
+    .footer-links { display: flex; gap: 16px; }
+    .footer-links a { font-size: 11px; color: var(--text-sub); text-decoration: none; }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      header { padding: 0 20px; }
+      nav { gap: 14px; }
+      .section-wrap { padding: 40px 24px 56px; }
+      footer { padding: 24px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><a href="/">どうせならうちのこ</a></div>
+    <nav>
+      <a href="/#templates">テンプレ</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/#howto">使い方</a>
+    </nav>
+  </header>
+
+  <div class="section-wrap">
+    <p class="section-label">Blog</p>
+    <h1 class="section-title">ブログ</h1>
+    <p class="section-sub">うちの子Tシャツの作り方、写真の選び方、プリント発注のコツなど。</p>
+
+    <div class="post-list">
+      {% for post in site.posts %}
+      <a class="post-item" href="{{ post.url }}">
+        <p class="post-date">{{ post.date | date: "%Y.%m.%d" }}</p>
+        <h2 class="post-title">{{ post.title }}</h2>
+        {% if post.description %}<p class="post-desc">{{ post.description }}</p>{% endif %}
+      </a>
+      {% else %}
+      <p class="post-empty">記事はまだありません。</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">どうせならうちのこ</div>
+    <div class="footer-links">
+      <a href="/blog/">ブログ</a>
+      <a href="/contact.html">お問い合わせ</a>
+      <a href="/privacy-policy.html">プライバシーポリシー</a>
+      <a href="/en/index.html">English</a>
+    </div>
+    <div class="footer-copy">© 2026 どうせならうちのこ. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
+
