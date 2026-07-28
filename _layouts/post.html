@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% seo %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-sub: #f8f9fa;
+      --accent: #0b57d0;
+      --accent-hover: #0842a0;
+      --text-main: #202124;
+      --text-sub: #5f6368;
+      --border: #e8eaed;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      letter-spacing: 0.025em;
+    }
+    header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo { font-size: 17px; font-weight: 700; letter-spacing: 0.02em; }
+    .logo a { color: var(--text-main); text-decoration: none; }
+    nav { display: flex; gap: 28px; align-items: center; }
+    nav a { font-size: 13px; font-weight: 500; color: var(--text-sub); text-decoration: none; }
+    nav a:hover { color: var(--text-main); }
+
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 56px 40px 72px; }
+    .breadcrumb { font-size: 12px; color: var(--text-sub); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .article-date {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+    }
+    h1.article-title {
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 14px;
+    }
+    .article-lead {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--text-sub);
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+    .article-body { font-size: 15px; line-height: 2; }
+    .article-body h2 {
+      font-size: 20px;
+      font-weight: 900;
+      margin: 48px 0 16px;
+      padding-top: 8px;
+    }
+    .article-body h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 32px 0 12px;
+    }
+    .article-body p { margin-bottom: 22px; }
+    .article-body ul, .article-body ol { margin: 0 0 22px 1.4em; }
+    .article-body li { margin-bottom: 8px; }
+    .article-body a { color: var(--accent); text-decoration: underline; }
+    .article-body a:hover { color: var(--accent-hover); }
+    .article-body img { max-width: 100%; height: auto; border-radius: 10px; margin: 8px 0 24px; }
+    .article-body strong { font-weight: 700; }
+    .article-body blockquote {
+      border-left: 3px solid var(--border);
+      padding: 4px 0 4px 18px;
+      margin: 0 0 22px;
+      color: var(--text-sub);
+    }
+    .article-cta {
+      background: var(--bg-sub);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      margin-top: 56px;
+    }
+    .article-cta h2 { font-size: 18px; font-weight: 900; margin-bottom: 10px; }
+    .article-cta p { font-size: 14px; color: var(--text-sub); line-height: 1.8; margin-bottom: 22px; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-logo { font-size: 14px; font-weight: 700; }
+    .footer-copy { font-size: 11px; color: var(--text-sub); }
+    .footer-links { display: flex; gap: 16px; }
+    .footer-links a { font-size: 11px; color: var(--text-sub); text-decoration: none; }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      header { padding: 0 20px; }
+      nav { gap: 14px; }
+      .article-wrap { padding: 40px 24px 56px; }
+      .article-cta { padding: 28px 20px; }
+      footer { padding: 24px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><a href="/">どうせならうちのこ</a></div>
+    <nav>
+      <a href="/#templates">テンプレ</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/#howto">使い方</a>
+    </nav>
+  </header>
+
+  <article class="article-wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> ／ <a href="/blog/">ブログ</a></p>
+    <p class="article-date">{{ page.date | date: "%Y.%m.%d" }}</p>
+    <h1 class="article-title">{{ page.title }}</h1>
+    {% if page.description %}<p class="article-lead">{{ page.description }}</p>{% endif %}
+
+    <div class="article-body">
+      {{ content }}
+    </div>
+
+    <div class="article-cta">
+      <h2>うちの子Tシャツ、作ってみませんか</h2>
+      <p>Canvaテンプレートは無料。写真を差し替えるだけで、あなただけのデザインになります。</p>
+      <a href="/#templates" class="btn-primary">テンプレートを見る</a>
+    </div>
+  </article>
+
+  <footer>
+    <div class="footer-logo">どうせならうちのこ</div>
+    <div class="footer-links">
+      <a href="/blog/">ブログ</a>
+      <a href="/contact.html">お問い合わせ</a>
+      <a href="/privacy-policy.html">プライバシーポリシー</a>
+      <a href="/en/index.html">English</a>
+    </div>
+    <div class="footer-copy">© 2026 どうせならうちのこ. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
+
