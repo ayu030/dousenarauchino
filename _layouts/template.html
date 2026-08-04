@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% seo %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-sub: #f8f9fa;
+      --accent: #0b57d0;
+      --accent-hover: #0842a0;
+      --text-main: #202124;
+      --text-sub: #5f6368;
+      --border: #e8eaed;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      letter-spacing: 0.025em;
+    }
+    header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo { font-size: 17px; font-weight: 700; letter-spacing: 0.02em; }
+    .logo a { color: var(--text-main); text-decoration: none; }
+    nav { display: flex; gap: 28px; align-items: center; }
+    nav a { font-size: 13px; font-weight: 500; color: var(--text-sub); text-decoration: none; }
+    nav a:hover { color: var(--text-main); }
+
+    .tpl-wrap { max-width: 860px; margin: 0 auto; padding: 48px 40px 72px; }
+    .breadcrumb { font-size: 12px; color: var(--text-sub); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+
+    .tpl-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .tpl-visual {
+      aspect-ratio: 3/4;
+      background: var(--bg-sub);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tpl-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .tpl-visual-placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .tpl-visual-placeholder span:first-child { font-size: 52px; opacity: 0.2; }
+    .tpl-visual-placeholder span:last-child {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--text-sub); opacity: 0.45;
+    }
+    .tpl-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-sub); margin-bottom: 10px;
+    }
+    h1.tpl-title { font-size: clamp(22px, 3.4vw, 30px); font-weight: 900; line-height: 1.35; margin-bottom: 12px; }
+    .tpl-sub { font-size: 14px; line-height: 1.9; color: var(--text-sub); margin-bottom: 24px; }
+    .tpl-meta { border-top: 1px solid var(--border); padding-top: 18px; margin-bottom: 26px; }
+    .tpl-meta dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; font-size: 13px; }
+    .tpl-meta dt { color: var(--text-sub); white-space: nowrap; }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      padding: 13px 30px; border-radius: 100px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      display: inline-block; text-align: center;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .tpl-note { font-size: 12px; color: var(--text-sub); margin-top: 12px; line-height: 1.7; }
+
+    .tpl-body { font-size: 15px; line-height: 2; margin-top: 56px; }
+    .tpl-body h2 { font-size: 19px; font-weight: 900; margin: 44px 0 14px; }
+    .tpl-body h2:first-child { margin-top: 0; }
+    .tpl-body p { margin-bottom: 20px; }
+    .tpl-body ul { margin: 0 0 20px 1.4em; }
+    .tpl-body li { margin-bottom: 6px; }
+    .tpl-body a { color: var(--accent); text-decoration: underline; }
+    .tpl-body img { max-width: 100%; height: auto; border-radius: 10px; margin: 8px 0 24px; }
+    .tpl-body strong { font-weight: 700; }
+
+    .tpl-cta {
+      background: var(--bg-sub); border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px 32px; text-align: center; margin-top: 56px;
+    }
+    .tpl-cta h2 { font-size: 18px; font-weight: 900; margin-bottom: 10px; }
+    .tpl-cta p { font-size: 14px; color: var(--text-sub); line-height: 1.8; margin-bottom: 22px; }
+
+    .tpl-others { margin-top: 56px; border-top: 1px solid var(--border); padding-top: 32px; }
+    .tpl-others h2 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+    .tpl-others-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tpl-chip {
+      font-size: 13px; text-decoration: none; color: var(--text-main);
+      border: 1px solid var(--border); border-radius: 100px; padding: 8px 16px;
+    }
+    .tpl-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 28px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px; margin-top: 64px;
+    }
+    .footer-logo { font-size: 14px; font-weight: 700; }
+    .footer-copy { font-size: 11px; color: var(--text-sub); }
+    .footer-links { display: flex; gap: 16px; }
+    .footer-links a { font-size: 11px; color: var(--text-sub); text-decoration: none; }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 700px) {
+      header { padding: 0 20px; }
+      nav { gap: 14px; }
+      .tpl-wrap { padding: 32px 24px 56px; }
+      .tpl-head { grid-template-columns: 1fr; gap: 28px; }
+      .tpl-cta { padding: 28px 20px; }
+      footer { padding: 24px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><a href="/">どうせならうちのこ</a></div>
+    <nav>
+      <a href="/#templates">テンプレ</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/#howto">使い方</a>
+    </nav>
+  </header>
+
+  <div class="tpl-wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> ／ <a href="/#templates">テンプレート一覧</a></p>
+
+    <div class="tpl-head">
+      <div class="tpl-visual">
+        {% if page.image %}
+        <img src="{{ page.image }}" alt="{{ page.title }} のTシャツデザイン">
+        {% else %}
+        <div class="tpl-visual-placeholder"><span>👕</span><span>写真準備中</span></div>
+        {% endif %}
+      </div>
+
+      <div>
+        <p class="tpl-eyebrow">Free Template</p>
+        <h1 class="tpl-title">{{ page.title }}</h1>
+        {% if page.description %}<p class="tpl-sub">{{ page.description }}</p>{% endif %}
+
+        <div class="tpl-meta">
+          <dl>
+            {% if page.phrase %}<dt>フレーズ</dt><dd>{{ page.phrase }}</dd>{% endif %}
+            {% if page.color %}<dt>カラー</dt><dd>{{ page.color }}</dd>{% endif %}
+            {% if page.pet %}<dt>向いている子</dt><dd>{{ page.pet }}</dd>{% endif %}
+          </dl>
+        </div>
+
+        <a href="{{ page.canva }}" class="btn-primary" target="_blank" rel="noopener">Canvaでこのテンプレートを開く</a>
+        <p class="tpl-note">Canvaの無料アカウントがあれば使えます。「テンプレートを使用」でコピーを作り、写真を差し替えてください。</p>
+      </div>
+    </div>
+
+    <div class="tpl-body">
+      {{ content }}
+    </div>
+
+    <div class="tpl-cta">
+      <h2>気に入ったら、そのまま作れます</h2>
+      <p>写真を差し替えてPNGで書き出すだけ。プリント発注までの手順は使い方ガイドにまとめています。</p>
+      <a href="{{ page.canva }}" class="btn-primary" target="_blank" rel="noopener">Canvaで開く</a>
+    </div>
+
+    <div class="tpl-others">
+      <h2>ほかのテンプレート</h2>
+      <div class="tpl-others-list">
+        {% for t in site.templates %}{% unless t.url == page.url %}
+        <a class="tpl-chip" href="{{ t.url }}">{{ t.title }}</a>
+        {% endunless %}{% endfor %}
+        <a class="tpl-chip" href="/#templates">一覧をすべて見る</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">どうせならうちのこ</div>
+    <div class="footer-links">
+      <a href="/blog/">ブログ</a>
+      <a href="/contact.html">お問い合わせ</a>
+      <a href="/privacy-policy.html">プライバシーポリシー</a>
+      <a href="/en/index.html">English</a>
+    </div>
+    <div class="footer-copy">© 2026 どうせならうちのこ. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
+
