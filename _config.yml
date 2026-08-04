@@ -9,12 +9,22 @@ plugins:
 
 permalink: /blog/:slug/
 
+collections:
+  templates:
+    output: true
+    permalink: /templates/:name/
+
 defaults:
   - scope:
       path: ""
       type: posts
     values:
       layout: post
+  - scope:
+      path: ""
+      type: templates
+    values:
+      layout: template
 
 exclude:
   - README.md
