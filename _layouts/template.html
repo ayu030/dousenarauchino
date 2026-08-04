@@ -96,32 +96,45 @@
     .tpl-cta h2 { font-size: 18px; font-weight: 900; margin-bottom: 10px; }
     .tpl-cta p { font-size: 14px; color: var(--text-sub); line-height: 1.8; margin-bottom: 22px; }
 
-    .tpl-others { margin-top: 56px; border-top: 1px solid var(--border); padding-top: 32px; }
-    .tpl-others h2 { font-size: 15px; font-weight: 700; margin-bottom: 18px; }
-    .tpl-others-grid {
+    .more-block { margin-top: 56px; border-top: 1px solid var(--border); padding-top: 32px; }
+    .more-block h2 { font-size: 15px; font-weight: 700; margin-bottom: 18px; }
+    .more-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 14px;
     }
-    .tpl-other-card {
+    .more-card {
       display: block; text-decoration: none; color: inherit;
       border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
       transition: box-shadow 0.2s, transform 0.2s;
     }
-    .tpl-other-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.07); }
-    .tpl-other-thumb {
+    .more-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.07); }
+    .more-thumb {
       aspect-ratio: 3/4; background: var(--bg-sub);
       display: flex; align-items: center; justify-content: center;
     }
-    .tpl-other-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .tpl-other-thumb span { font-size: 34px; opacity: 0.2; }
-    .tpl-other-name {
+    .more-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .more-thumb span { font-size: 34px; opacity: 0.2; }
+    .more-name {
       font-size: 12px; line-height: 1.5; padding: 10px 12px 12px;
       border-top: 1px solid var(--border);
     }
-    .tpl-others-more { margin-top: 18px; font-size: 13px; }
-    .tpl-others-more a { color: var(--accent); text-decoration: none; font-weight: 700; }
-    .tpl-others-more a:hover { text-decoration: underline; }
+    .more-posts { list-style: none; }
+    .more-posts li { border-bottom: 1px solid var(--border); }
+    .more-posts li:first-child { border-top: 1px solid var(--border); }
+    .more-posts a {
+      display: block; text-decoration: none; color: inherit;
+      padding: 16px 0; transition: opacity 0.15s;
+    }
+    .more-posts a:hover { opacity: 0.6; }
+    .more-post-date {
+      display: block; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.15em; color: var(--text-sub); margin-bottom: 4px;
+    }
+    .more-post-title { font-size: 14px; font-weight: 700; line-height: 1.6; }
+    .more-link { margin-top: 18px; font-size: 13px; }
+    .more-link a { color: var(--accent); text-decoration: none; font-weight: 700; }
+    .more-link a:hover { text-decoration: underline; }
 
     footer {
       border-top: 1px solid var(--border); padding: 28px 40px;
@@ -140,7 +153,7 @@
       .tpl-wrap { padding: 32px 24px 56px; }
       .tpl-head { grid-template-columns: 1fr; gap: 28px; }
       .tpl-cta { padding: 28px 20px; }
-      .tpl-others-grid { grid-template-columns: 1fr 1fr; }
+      .more-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 24px; flex-direction: column; text-align: center; }
     }
   </style>
@@ -196,20 +209,37 @@
       <a href="{{ page.canva }}" class="btn-primary" target="_blank" rel="noopener">Canvaで開く</a>
     </div>
 
-    <div class="tpl-others">
+    <div class="more-block">
       <h2>ほかのテンプレート</h2>
-      <div class="tpl-others-grid">
+      <div class="more-grid">
         {% for t in site.templates %}{% unless t.url == page.url %}
-        <a class="tpl-other-card" href="{{ t.url }}">
-          <div class="tpl-other-thumb">
+        <a class="more-card" href="{{ t.url }}">
+          <div class="more-thumb">
             {% if t.image %}<img src="{{ t.image }}" alt="{{ t.title }} のTシャツデザイン" loading="lazy">{% else %}<span>👕</span>{% endif %}
           </div>
-          <div class="tpl-other-name">{{ t.title }}</div>
+          <div class="more-name">{{ t.title }}</div>
         </a>
         {% endunless %}{% endfor %}
       </div>
-      <p class="tpl-others-more"><a href="/#templates">テンプレート一覧をすべて見る →</a></p>
+      <p class="more-link"><a href="/#templates">テンプレート一覧をすべて見る →</a></p>
     </div>
+
+    {% if site.posts.size > 0 %}
+    <div class="more-block">
+      <h2>読みもの</h2>
+      <ul class="more-posts">
+        {% for p in site.posts limit: 5 %}
+        <li>
+          <a href="{{ p.url }}">
+            <span class="more-post-date">{{ p.date | date: "%Y.%m.%d" }}</span>
+            <span class="more-post-title">{{ p.title }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="more-link"><a href="/blog/">ブログをすべて見る →</a></p>
+    </div>
+    {% endif %}
   </div>
 
   <footer>
