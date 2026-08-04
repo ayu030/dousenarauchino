@@ -110,6 +110,46 @@
     }
     .btn-primary:hover { background: var(--accent-hover); }
 
+    .more-block { margin-top: 56px; border-top: 1px solid var(--border); padding-top: 32px; }
+    .more-block h2 { font-size: 15px; font-weight: 700; margin-bottom: 18px; }
+    .more-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px;
+    }
+    .more-card {
+      display: block; text-decoration: none; color: inherit;
+      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .more-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.07); }
+    .more-thumb {
+      aspect-ratio: 3/4; background: var(--bg-sub);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .more-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .more-thumb span { font-size: 34px; opacity: 0.2; }
+    .more-name {
+      font-size: 12px; line-height: 1.5; padding: 10px 12px 12px;
+      border-top: 1px solid var(--border);
+    }
+    .more-posts { list-style: none; }
+    .more-posts li { border-bottom: 1px solid var(--border); }
+    .more-posts li:first-child { border-top: 1px solid var(--border); }
+    .more-posts a {
+      display: block; text-decoration: none; color: inherit;
+      padding: 16px 0; transition: opacity 0.15s;
+    }
+    .more-posts a:hover { opacity: 0.6; }
+    .more-post-date {
+      display: block; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.15em; color: var(--text-sub); margin-bottom: 4px;
+    }
+    .more-post-title { font-size: 14px; font-weight: 700; line-height: 1.6; }
+    .more-link { margin-top: 18px; font-size: 13px; }
+    .more-link a { color: var(--accent); text-decoration: none; font-weight: 700; }
+    .more-link a:hover { text-decoration: underline; }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 40px;
@@ -130,6 +170,7 @@
       nav { gap: 14px; }
       .article-wrap { padding: 40px 24px 56px; }
       .article-cta { padding: 28px 20px; }
+      .more-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 24px; flex-direction: column; text-align: center; }
     }
   </style>
@@ -160,6 +201,38 @@
       <p>Canvaテンプレートは無料。写真を差し替えるだけで、あなただけのデザインになります。</p>
       <a href="/#templates" class="btn-primary">テンプレートを見る</a>
     </div>
+
+    {% if site.templates.size > 0 %}
+    <div class="more-block">
+      <h2>テンプレート</h2>
+      <div class="more-grid">
+        {% for t in site.templates %}
+        <a class="more-card" href="{{ t.url }}">
+          <div class="more-thumb">
+            {% if t.image %}<img src="{{ t.image }}" alt="{{ t.title }} のTシャツデザイン" loading="lazy">{% else %}<span>👕</span>{% endif %}
+          </div>
+          <div class="more-name">{{ t.title }}</div>
+        </a>
+        {% endfor %}
+      </div>
+      <p class="more-link"><a href="/#templates">テンプレート一覧をすべて見る →</a></p>
+    </div>
+    {% endif %}
+
+    <div class="more-block">
+      <h2>ほかの記事</h2>
+      <ul class="more-posts">
+        {% for p in site.posts limit: 5 %}{% unless p.url == page.url %}
+        <li>
+          <a href="{{ p.url }}">
+            <span class="more-post-date">{{ p.date | date: "%Y.%m.%d" }}</span>
+            <span class="more-post-title">{{ p.title }}</span>
+          </a>
+        </li>
+        {% endunless %}{% endfor %}
+      </ul>
+      <p class="more-link"><a href="/blog/">ブログをすべて見る →</a></p>
+    </div>
   </article>
 
   <footer>
@@ -175,4 +248,3 @@
 
 </body>
 </html>
-
