@@ -4,6 +4,7 @@ description: "写真を切り抜かずにそのまま使えるデュオトーン
 phrase: "All I want is your happiness."
 color: "ピンク × 水色"
 pet: "犬でも猫でも／毛色を選びません"
+image: /1.png
 canva: "https://canva.link/x5y7edu8x0ed7ps"
 ---
 
